@@ -6,7 +6,16 @@
 
     <groupId>ca.concordia.cs.aseg.sbson</groupId>
     <artifactId>sbson-framework</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sbson-api</module>
+        <module>sbson-core</module>
+        <module>sbson-common</module>
+        <module>sbson-experiment</module>
+        <module>sbson-web</module>
+        <module>sbson-plugin</module>
+    </modules>
 
 
 </project>
