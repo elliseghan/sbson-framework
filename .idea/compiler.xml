@@ -6,6 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="sbson-api" />
+        <module name="sbson-common" />
+        <module name="sbson-core" />
+        <module name="sbson-experiment" />
+        <module name="sbson-plugin" />
+        <module name="sbson-web" />
         <module name="sbsonapi" />
         <module name="sbsoncommon" />
         <module name="sbsoncore" />

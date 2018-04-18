@@ -2,7 +2,8 @@ package ca.concordia.cs.aseg.sbson.core.miner.ruby;
 
 
 import ca.concordia.cs.aseg.sbson.common.http.HTTPUtils;
-import jdk.incubator.http.HttpResponse;
+
+import org.apache.http.HttpResponse;
 import org.json.*;
 
 import java.io.BufferedReader;
@@ -35,42 +36,50 @@ public class RubyMiner {
             list = br.lines().collect(Collectors.toList());
             Collections.sort(list);
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        list.forEach((name) -> getVersionsFromName(name));
+        for (String name : list) {
+            getVersionsFromName(name);
+        }
     }
 
     private static void getVersionsFromName(String name) {
-        name = name.replace("\"", "");
-        System.out.println(new Date(System.currentTimeMillis()).toGMTString() + " - Working on: " + name);
-        String url = getBaseUrlAllVersions(name);
-        try {
-            if (requestCount % 10 == 0) {
-                Thread.sleep(2000);
-                requestCount++;
-            }
-            HttpResponse response = HTTPUtils.sendHTTPRequest(url);
-            if (response.statusCode() == 200) {
-                // System.out.println(response.body());
-                JSONArray jsonarray = new JSONArray(response.body().toString());
-                for (int i = 0; i < jsonarray.length(); i++) {
-                    JSONObject jsonObject = jsonarray.getJSONObject(i);
-                    String version = jsonObject.getString("number");
-                    getFullGemDetails(name, version);
-                }
-            }
-        } catch (UnresolvedAddressException e) {
-            System.err.println(new Date(System.currentTimeMillis()).toGMTString() + " - Unresolved Address Exception at: " + url);
+
+
+
+            name = name.replace("\"", "");
+        if (name.compareTo("gibbon") > 0) {
+            System.out.println(new Date(System.currentTimeMillis()).toString() + " - Working on: " + name);
+            String url = getBaseUrlAllVersions(name);
             try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
+                if (requestCount % 10 == 0) {
+                    Thread.sleep(1500);
+                    requestCount++;
+                }
+                HttpResponse response = HTTPUtils.sendHTTPRequest(url);
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    // System.out.println(response.body());
+                    JSONArray jsonarray = new JSONArray(response.getEntity());
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        JSONObject jsonObject = jsonarray.getJSONObject(i);
+                        String version = jsonObject.getString("number");
+                        getFullGemDetails(name, version);
+                    }
+                }
+            } catch (UnresolvedAddressException e) {
+                System.err.println(new Date(System.currentTimeMillis()).toString() + " - Unresolved Address Exception at: " + url);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            } catch (Exception e) {
+                System.err.println(new Date(System.currentTimeMillis()).toString() + " - HTTP request (GEM versions) failed: " + url);
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            System.err.println(new Date(System.currentTimeMillis()).toGMTString() + " - HTTP request (GEM versions) failed: " + url);
-            e.printStackTrace();
         }
     }
 
@@ -78,7 +87,7 @@ public class RubyMiner {
         // System.out.println(name + ": " + version);
         String url = getBaseUrlVersionDetails(name, version);
         try {
-            String directory = "E:/DEVELOPMENT/RUBYGEMS/Repo/" + name + "/" + version;
+            String directory = "D:/DEVELOPMENT/RUBYGEMS/Repo/" + name + "/" + version;
             String filename = name + "-" + version + ".json";
             Path tempFile = null;
             if (directory == null) {
@@ -92,25 +101,25 @@ public class RubyMiner {
             if (!Files.exists(tempFile)) {
                 Files.createFile(tempFile);
                 if (requestCount % 10 == 0) {
-                    Thread.sleep(2000);
+                    Thread.sleep(1500);
                     requestCount++;
                 }
                 HttpResponse response = HTTPUtils.sendHTTPRequest(url, tempFile);
-                if (response.statusCode() == 200) {
-                    System.out.println(response.body());
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    System.out.println(response.getEntity());
                 } else {
-                    System.err.println(new Date(System.currentTimeMillis()).toGMTString() + " - Bad status code: " + url);
+                    System.err.println(new Date(System.currentTimeMillis()).toString() + " - Bad status code: " + url);
                 }
             }
         } catch (UnresolvedAddressException e) {
-            System.err.println(new Date(System.currentTimeMillis()).toGMTString() + " - Unresolved Address Exception at: " + url);
+            System.err.println(new Date(System.currentTimeMillis()).toString() + " - Unresolved Address Exception at: " + url);
             try {
-                Thread.sleep(5000);
+                Thread.sleep(2000);
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
         } catch (Exception e) {
-            System.err.println(new Date(System.currentTimeMillis()).toGMTString() + " - HTTP request (GEM details) failed: " + url);
+            System.err.println(new Date(System.currentTimeMillis()).toString() + " - HTTP request (GEM details) failed: " + url);
             e.printStackTrace();
         }
     }
