@@ -1,0 +1,12 @@
+Ruby
+------
+Expected: 142,199 projects
+Snapshot: 2018 Apr 02
+Downloaded: 141,840 projects
+
+
+NPM
+-------
+Expected: 851,000 projects
+Snapshot: 2018 Apr 05
+Downloaded: 730,956 projects
