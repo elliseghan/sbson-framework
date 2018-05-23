@@ -1,65 +1,27 @@
 package ca.concordia.cs.aseg.sbson.experiment.survey;
 
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
+
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.Properties;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+
 
 public class EmailDistributor {
     private Properties emailProperties;
     private String login, password, message, subject;
 
     public static void main(String[] args) {
-        TreeSet<String> email = new TreeSet<>();
-        try {
-            EmailDistributor emailDistributor = new EmailDistributor("e_eghan@encs.concordia.ca", "Tr1n!ty");
-            String emailListLocation = "/emails-maven.txt";
-            TreeMap<String, String> mavenEmails = new TreeMap<>();
-            InputStream is = EmailDistributor.class.getResourceAsStream(emailListLocation);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-            StringBuffer stringBuffer = new StringBuffer();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuffer.append(line);
-            }
-            String string = stringBuffer.substring(1);
-            String[] strings = string.split(",");
-            for (String str : strings) {
-                String[] stringParts = str.split("=");
-                String cleanEmail = emailDistributor.cleanEmail(stringParts[0].replaceAll("\"", "").trim());
-                if (!cleanEmail.equals("n/a"))
-                    email.add(cleanEmail);
-            }
-            is.close();
-            bufferedReader.close();
+        EmailDistributor emailDistributor = new EmailDistributor("e_eghan@encs.concordia.ca", "Tr1n!ty");
+        emailDistributor.sendEmail("api-break-survey@encs.concordia.ca");
+    }
 
-            emailListLocation = "/emails.csv";
-            is = EmailDistributor.class.getResourceAsStream(emailListLocation);
-            bufferedReader = new BufferedReader(new InputStreamReader(is));
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] stringParts = line.split(",");
-                String cleanEmail = emailDistributor.cleanEmail(stringParts[1].replaceAll("\"", "").trim());
-                if (!cleanEmail.equals("n/a"))
-                    email.add(cleanEmail);
-            }
-            is.close();
-            bufferedReader.close();
-
-            email.forEach((str) -> emailDistributor.sendEmail(str));
-            //System.out.println(email);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public EmailDistributor() {
     }
 
     public EmailDistributor(String login, String password) {
@@ -73,9 +35,24 @@ public class EmailDistributor {
         this.subject = getSubject();
     }
 
-    public String cleanEmail(String emailString) {
-        String cleanEmailString = "n/a";
-        Matcher m = null;
+    /*public String cleanEmail(String emailString) {
+        if (emailString.endsWith(".edu"))
+            return "n/a";
+        if (emailString.endsWith("@qq.com"))
+            return "n/a";
+        if (emailString.endsWith("noreply") || emailString.endsWith("no-reply"))
+            return "n/a";
+        if (!(emailString.contains("gmail") || emailString.contains("yahoo") || emailString.contains("hotmail") || emailString.contains("live")))
+            return "n/a";
+        if (emailString.contains("{") || emailString.contains("}") || emailString.contains("+") || emailString.contains("*"))
+            return "n/a";
+        if (emailString.contains(" at ")) {
+            emailString = emailString.replace(" at ", "@");
+        }
+        // String cleanEmailString = "n/a";
+       *//* Matcher m = null;
+        if(emailString.contains("noreply"))
+            return cleanEmailString;
         if (emailString.contains(" at ")) {
             emailString = emailString.replace(" at ", "@");
         }
@@ -88,13 +65,65 @@ public class EmailDistributor {
             while (m.find()) {
                 cleanEmailString = m.group();
                 //if (cleanEmailString.contains(".edu."))
-                //System.out.println(cleanEmailString);
-            }
-        return cleanEmailString;
+                //System.out.println(cleanEm
+                ailString);
+            }*//*
+        if (EmailValidator.getInstance().isValid(emailString)) {
+            return emailString;
+        } else {
+            return "n/a";
+        }
     }
 
+    private int getAverageCommits() throws IOException {
+        int avgCommits = 0;
+        int sum = 0, count = 0;
+        String emailListLocation = "/emails.csv";
+        InputStream is = EmailDistributor.class.getResourceAsStream(emailListLocation);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            String[] stringParts = line.split(",");
+            int commits = 0;
+            try {
+                commits = Integer.valueOf(stringParts[2]);
+            } catch (NumberFormatException e) {
+            }
+
+            sum = sum + commits;
+            count++;
+        }
+        avgCommits = sum / count;
+        System.out.println(sum + ", " + count + ", " + avgCommits);
+        is.close();
+        bufferedReader.close();
+
+        return avgCommits;
+    }
+
+    private Set<String> pickRandomEmails(String fileLocation, int n) throws IOException {
+        List<String> emailList = new ArrayList<>();
+        Set<String> chosenEmails = new TreeSet<>();
+        InputStream is = EmailDistributor.class.getResourceAsStream(fileLocation);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            emailList.add(line);
+        }
+
+        for (int i = 0; i < n; i++) {
+            Collections.shuffle(emailList);
+            String email = emailList.get(0);
+            if (email != null) {
+                chosenEmails.add(email);
+                emailList.remove(email);
+            }
+        }
+
+        return chosenEmails;
+    }*/
     public void sendEmail(String receipientEmail) {
-        System.out.println(receipientEmail);
+        // System.out.println(receipientEmail);
         Authenticator auth = new SMTPAuthenticator(this.login, this.password);
         Session session = Session.getInstance(this.emailProperties, auth);
         MimeMessage msg = new MimeMessage(session);
@@ -105,22 +134,11 @@ public class EmailDistributor {
             msg.setSubject(this.subject);
             msg.setFrom(new InternetAddress(this.login));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(receipientEmail));
-            //Transport.send(msg);
+            Transport.send(msg);
 
-            //add email to success file
-            URL resourceUrl = EmailDistributor.class.getResource("/sentEmails.txt");
-            File file = Paths.get(resourceUrl.toURI()).toFile();
-            FileWriter fileWriter = new FileWriter(file, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(receipientEmail);
-            bufferedWriter.write("\n");
-            bufferedWriter.flush();
-            bufferedWriter.close();
         } catch (MessagingException ex) {
-            Logger.getLogger(EmailDistributor.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
