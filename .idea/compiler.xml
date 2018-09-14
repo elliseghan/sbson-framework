@@ -10,6 +10,7 @@
         <module name="sbson-common" />
         <module name="sbson-core" />
         <module name="sbson-experiment" />
+        <module name="sbson-ontologies" />
         <module name="sbson-plugin" />
         <module name="sbson-web" />
         <module name="sbsonapi" />

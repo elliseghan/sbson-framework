@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -11,6 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -62,14 +64,15 @@ public class Utils {
 
     public static String[] createUrl(String value, String type, String split) {
         String[] result = new String[2];
-        String str = "";//createDirectoryStructure(value, split) + "." + type;
-        result[1] = new String(str);
+        String str = "";
 
         if (type.equals("pom") || type.equals("jar")) {
-            str = "https://repo1.maven.org/maven2/" + createDirectoryStructure(value, split)+ "." + type;
+            result[1]=createDirectoryStructure(value, split)+ "." + type;
+            str = "https://repo1.maven.org/maven2/" + result[1];
+
         } else if(type.equals("sources.jar")){
-            //http://search.maven.org/remotecontent?filepath=org/atteo/moonshine/tomcat/1.2/tomcat-1.2-sources.jar
-            str = "https://repo1.maven.org/maven2/" + createDirectoryStructure(value, split)+ "-" + type;
+            result[1]=createDirectoryStructure(value, split)+ "-" + type;
+            str = "https://repo1.maven.org/maven2/" + result[1];
         }else {
 
             String[] gav = value.split(split);
@@ -86,6 +89,40 @@ public class Utils {
         return result;
     }
 
+    public static boolean getFileFromURL(String url, String saveName, boolean append) {
+        boolean success = false;
+        URL website;
+        try {
+            File file = new File(saveName);
+            System.out.println(file.getAbsolutePath());
+            if (file.exists()){
+                Date lastModified = new Date(file.lastModified());
+                Date today = new Date(System.currentTimeMillis());
+                if(DateUtils.isSameDay(lastModified,today)==true){
+                    return true;
+                }
+            }
+            website = new URL(url);
+            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+            File parentDir = file.getParentFile();
+            if (parentDir != null)
+                parentDir.mkdirs();
+
+            FileOutputStream fos = new FileOutputStream(saveName, append);
+
+            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+            fos.close();
+            success = true;
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            if (e instanceof java.net.UnknownHostException || e instanceof FileNotFoundException) {
+                e.printStackTrace();
+            } else {
+                e.printStackTrace();
+            }
+        }
+        return success;
+    }
     public static boolean getFileFromURL(String url, String saveName) {
         boolean success = false;
         URL website;
@@ -100,7 +137,7 @@ public class Utils {
             if (parentDir != null)
                 parentDir.mkdirs();
 
-            FileOutputStream fos = new FileOutputStream(saveName);
+            FileOutputStream fos = new FileOutputStream(saveName, false);
 
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
             fos.close();
@@ -117,10 +154,15 @@ public class Utils {
     }
 
     public static String[] getGAVFromFileName(String path) {
+        return getGAVFromFileName(path, Utils.POM_DUMP_LOCATION);
+    }
+
+    public static String[] getGAVFromFileName(String path, String basePath) {
         path = path.replace("\\", "/");
-        if (path.startsWith(Utils.POM_DUMP_LOCATION)) {
+        basePath = basePath.replace("\\", "/");
+        if (path.startsWith(basePath)) {
             String[] gav = new String[3];
-            path = path.replace(Utils.POM_DUMP_LOCATION, "");
+            path = path.replace(basePath, "");
 
             int pos = path.lastIndexOf("/");
             path = path.substring(0, pos);

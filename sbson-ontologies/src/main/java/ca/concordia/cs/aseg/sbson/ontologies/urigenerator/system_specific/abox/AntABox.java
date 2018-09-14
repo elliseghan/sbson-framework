@@ -1,0 +1,27 @@
+/*
+ * Created by ASEG at Concordia University.
+ * http://aseg.cs.concordia.ca
+ * http://aseg.cs.concordia.ca/segps
+ * Please see the LICENSE file for details.
+ */
+
+package ca.concordia.cs.aseg.sbson.ontologies.urigenerator.system_specific.abox;
+
+import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.namespace.NamespaceFactory;
+import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.registry.NamespaceRegistry;
+import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.registry.OntologyRegistry;
+import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.utils.URLCleaner;
+
+public class AntABox {
+	public static String AntTarget(String target){
+		String uri = NamespaceFactory.createAboxNamespace(NamespaceRegistry.theAboxNameSpace, OntologyRegistry.ant)
+				+ URLCleaner.clean(target);
+		return uri;
+	}
+	
+	public static String AntTask(String task){
+		String uri = NamespaceFactory.createAboxNamespace(NamespaceRegistry.theAboxNameSpace, OntologyRegistry.ant)
+				+ URLCleaner.clean(task);
+		return uri;
+	}
+}
