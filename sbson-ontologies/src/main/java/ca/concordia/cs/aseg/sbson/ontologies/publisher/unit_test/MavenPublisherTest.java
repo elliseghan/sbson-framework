@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.concordia.cs.aseg.sbson.core.model.maven.MavenArtifact;
-import ca.concordia.cs.aseg.sbson.core.model.maven.MavenDependency;
+import ca.concordia.cs.aseg.sbson.core.model.MavenArtifact;
+import ca.concordia.cs.aseg.sbson.core.model.Dependency;
 import ca.concordia.cs.aseg.sbson.ontologies.publisher.build.MavenPublisher;
 import org.junit.Test;
 
@@ -30,15 +30,15 @@ public class MavenPublisherTest {
 		MavenArtifact G = new MavenArtifact("prjG", "G", "1.0");
 		MavenArtifact H = new MavenArtifact("prjH", "H", "1.0");
 
-		List<MavenDependency> ADeps = new ArrayList<>();
-		MavenDependency depAB = new MavenDependency();
+		List<Dependency> ADeps = new ArrayList<>();
+		Dependency depAB = new Dependency();
 		depAB.setGroupID("prjB");
 		depAB.setArtifactID("B");
 		depAB.setVersion("1.0");
 		List<String> exclusionsAB = new ArrayList<>();
 		exclusionsAB.add("prjE:E");
 		depAB.setExclusions(exclusionsAB);
-		MavenDependency depAC = new MavenDependency();
+		Dependency depAC = new Dependency();
 		depAC.setGroupID("prjC");
 		depAC.setArtifactID("C");
 		depAC.setVersion("1.0");
@@ -46,15 +46,15 @@ public class MavenPublisherTest {
 		ADeps.add(depAC);
 		A.setDependencies(ADeps);
 
-		List<MavenDependency> BDeps = new ArrayList<>();
-		MavenDependency depBD = new MavenDependency();
+		List<Dependency> BDeps = new ArrayList<>();
+		Dependency depBD = new Dependency();
 		depBD.setGroupID("prjD");
 		depBD.setArtifactID("D");
 		depBD.setVersion("1.0");
 		List<String> exclusionsBD = new ArrayList<>();
 		exclusionsBD.add("prjG:G");
 		depBD.setExclusions(exclusionsBD);
-		MavenDependency depBF = new MavenDependency();
+		Dependency depBF = new Dependency();
 		depBF.setGroupID("prjF");
 		depBF.setArtifactID("F");
 		depBF.setVersion("1.0");
@@ -62,20 +62,20 @@ public class MavenPublisherTest {
 		BDeps.add(depBF);
 		B.setDependencies(BDeps);
 
-		List<MavenDependency> CDeps = new ArrayList<>();
-		MavenDependency depCE = new MavenDependency();
+		List<Dependency> CDeps = new ArrayList<>();
+		Dependency depCE = new Dependency();
 		depCE.setGroupID("prjE");
 		depCE.setArtifactID("E");
 		depCE.setVersion("1.0");
 		CDeps.add(depCE);
 		C.setDependencies(CDeps);
 
-		List<MavenDependency> DDeps = new ArrayList<>();
-		MavenDependency depDE = new MavenDependency();
+		List<Dependency> DDeps = new ArrayList<>();
+		Dependency depDE = new Dependency();
 		depDE.setGroupID("prjE");
 		depDE.setArtifactID("E");
 		depDE.setVersion("1.0");
-		MavenDependency depDG = new MavenDependency();
+		Dependency depDG = new Dependency();
 		depDG.setGroupID("prjG");
 		depDG.setArtifactID("G");
 		depDG.setVersion("1.0");
@@ -83,8 +83,8 @@ public class MavenPublisherTest {
 		DDeps.add(depDG);
 		D.setDependencies(DDeps);
 
-		List<MavenDependency> EDeps = new ArrayList<>();
-		MavenDependency depEH = new MavenDependency();
+		List<Dependency> EDeps = new ArrayList<>();
+		Dependency depEH = new Dependency();
 		depEH.setGroupID("prjH");
 		depEH.setArtifactID("H");
 		depEH.setVersion("1.0");

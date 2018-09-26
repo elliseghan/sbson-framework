@@ -1,9 +1,11 @@
-package ca.concordia.cs.aseg.sbson.core.model.maven;;
+package ca.concordia.cs.aseg.sbson.core.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MavenDependency {
+
+
+public class Dependency {
 
 	private String groupID, artifactID, version, scope, type;
 	private boolean optional=false;

@@ -23,10 +23,15 @@ public class Utils {
     public static String MAVEN_INDEX_LOCATION, LOCAL_MAVEN_REPO, TRIPLES_LOCATION, POM_DUMP_LOCATION, JAR_DUMP_LOCATION;
 
     public static void initProperties() {
+        String propFileName = "src/main/resources/sbson-core.properties";
+        initProperties(propFileName);
+    }
+
+    public static void initProperties(String propertyFileLocation) {
         Properties prop;
         try {
             prop = new Properties();
-            String propFileName = "src/main/resources/sbson-core.properties";
+            String propFileName = propertyFileLocation;
             InputStream inputStream = new FileInputStream(propFileName);
             if (inputStream != null) {
                 prop.load(inputStream);
@@ -36,6 +41,7 @@ public class Utils {
             Utils.TRIPLES_LOCATION = prop.getProperty("TRIPLES_LOCATION");
             Utils.POM_DUMP_LOCATION = Utils.MAVEN_INDEX_LOCATION + "Maven Repo/";
             Utils.JAR_DUMP_LOCATION = Utils.POM_DUMP_LOCATION;
+            System.out.println("property file loaded successfully (e.g., JAR_DUMP_LOCATION = "+JAR_DUMP_LOCATION+")");
         } catch (FileNotFoundException e) {
             System.out.println("property file not found in resource folder");
         } catch (Exception e) {
@@ -67,13 +73,13 @@ public class Utils {
         String str = "";
 
         if (type.equals("pom") || type.equals("jar")) {
-            result[1]=createDirectoryStructure(value, split)+ "." + type;
+            result[1] = createDirectoryStructure(value, split) + "." + type;
             str = "https://repo1.maven.org/maven2/" + result[1];
 
-        } else if(type.equals("sources.jar")){
-            result[1]=createDirectoryStructure(value, split)+ "-" + type;
+        } else if (type.equals("sources.jar")) {
+            result[1] = createDirectoryStructure(value, split) + "-" + type;
             str = "https://repo1.maven.org/maven2/" + result[1];
-        }else {
+        } else {
 
             String[] gav = value.split(split);
             str = "http://search.maven.org/solrsearch/select?q=g:%22" + gav[0] + "%22+AND+a:%22" + gav[1]
@@ -95,10 +101,10 @@ public class Utils {
         try {
             File file = new File(saveName);
             System.out.println(file.getAbsolutePath());
-            if (file.exists()){
+            if (file.exists()) {
                 Date lastModified = new Date(file.lastModified());
                 Date today = new Date(System.currentTimeMillis());
-                if(DateUtils.isSameDay(lastModified,today)==true){
+                if (DateUtils.isSameDay(lastModified, today) == true) {
                     return true;
                 }
             }
@@ -123,6 +129,7 @@ public class Utils {
         }
         return success;
     }
+
     public static boolean getFileFromURL(String url, String saveName) {
         boolean success = false;
         URL website;

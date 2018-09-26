@@ -16,14 +16,14 @@ public class JavaABox {
 
 	public static String JavaDoc(String javaDocID) {
 		String uri = NamespaceFactory.createAboxNamespace(
-				NamespaceRegistry.theSEONAboxNameSpace, OntologyRegistry.main)
+				NamespaceRegistry.theSEONAboxNameSpace, OntologyRegistry.seon_main)
 				+ URLCleaner.clean(javaDocID);
 		return uri;
 	}
 	
 	public static String JavaPackage(String packageName) {
 		String uri = NamespaceFactory.createAboxNamespace(
-				NamespaceRegistry.theSEONAboxNameSpace, OntologyRegistry.main)
+				NamespaceRegistry.theSEONAboxNameSpace, OntologyRegistry.seon_main)
 				+ URLCleaner.clean(packageName);
 		return uri;
 	}

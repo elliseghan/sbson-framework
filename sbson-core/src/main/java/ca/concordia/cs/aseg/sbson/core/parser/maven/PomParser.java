@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -13,13 +12,12 @@ import java.util.Properties;
 import javax.xml.parsers.ParserConfigurationException;
 
 import ca.concordia.cs.aseg.sbson.core.Utils;
-import ca.concordia.cs.aseg.sbson.core.model.maven.MavenArtifact;
-import ca.concordia.cs.aseg.sbson.core.model.maven.MavenDependency;
-import ca.concordia.cs.aseg.sbson.core.model.maven.MavenLicense;
+import ca.concordia.cs.aseg.sbson.core.model.Dependency;
+import ca.concordia.cs.aseg.sbson.core.model.License;
+import ca.concordia.cs.aseg.sbson.core.model.MavenArtifact;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.model.Dependency;
+
 import org.apache.maven.model.Exclusion;
-import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
 import org.apache.maven.project.MavenProject;
@@ -60,12 +58,12 @@ public abstract class PomParser {
             return getNormalizedVariable(this.model, project.getVersion());
     }
 
-    private List<MavenDependency> getDependencies(MavenProject project) {
-        List<MavenDependency> artifacts = new ArrayList<MavenDependency>();
-        MavenDependency artifact = null;
+    private List<Dependency> getDependencies(MavenProject project) {
+        List<Dependency> artifacts = new ArrayList<Dependency>();
+        Dependency artifact = null;
         if (project.getDependencyManagement() != null) {
-            for (Dependency dependency : project.getDependencyManagement().getDependencies()) {
-                artifact = new MavenDependency();
+            for (org.apache.maven.model.Dependency dependency : project.getDependencyManagement().getDependencies()) {
+                artifact = new Dependency();
                 artifact.setArtifactID(getNormalizedVariable(model, dependency.getArtifactId()));
                 artifact.setGroupID(getNormalizedVariable(model, dependency.getGroupId()));
                 artifact.setVersion(getNormalizedVariable(model, dependency.getVersion()));
@@ -85,8 +83,8 @@ public abstract class PomParser {
                     artifacts.add(artifact);
             }
         }
-        for (Dependency dependency : project.getDependencies()) {
-            artifact = new MavenDependency();
+        for (org.apache.maven.model.Dependency dependency : project.getDependencies()) {
+            artifact = new Dependency();
             artifact.setArtifactID(getNormalizedVariable(model, dependency.getArtifactId()));
             artifact.setGroupID(getNormalizedVariable(model, dependency.getGroupId()));
             artifact.setVersion(getNormalizedVariable(model, dependency.getVersion()));
@@ -148,11 +146,11 @@ public abstract class PomParser {
         }
     }
 
-    private List<MavenLicense> getLicenses(MavenProject project) {
-        List<MavenLicense> licenses = new ArrayList<>();
-        MavenLicense mavenLicense = null;
-        for (License license : project.getLicenses()) {
-            mavenLicense = new MavenLicense(license.getName(), license.getUrl(), license.getComments(),
+    private List<License> getLicenses(MavenProject project) {
+        List<License> licenses = new ArrayList<>();
+        License mavenLicense = null;
+        for (org.apache.maven.model.License license : project.getLicenses()) {
+            mavenLicense = new License(license.getName(), license.getUrl(), license.getComments(),
                     license.getDistribution());
             licenses.add(mavenLicense);
         }
@@ -197,7 +195,7 @@ public abstract class PomParser {
         } catch (Exception exception) {
 
         }
-        List<MavenLicense> licenses = getLicenses(mavenProject);
+        List<License> licenses = getLicenses(mavenProject);
         artifact.setLicenses(licenses);
         return artifact;
     }

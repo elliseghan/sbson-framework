@@ -1,6 +1,6 @@
-package ca.concordia.cs.aseg.sbson.core.model.maven;
+package ca.concordia.cs.aseg.sbson.core.model;
 
-public class MavenStakeholder {
+public class Stakeholder {
 
 	private String name, email, url;
 

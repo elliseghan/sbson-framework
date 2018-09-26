@@ -3,7 +3,8 @@ package ca.concordia.cs.aseg.sbson.experiment.icse;
 public class Queries {
 
     public static String getQueryBase() {
-        String base = "PREFIX owl: <http://www.w3.org/2002/07/owl#>" + "\n"
+        String base = "DEFINE input:inference 'asm-rules'\n" +
+                "PREFIX owl: <http://www.w3.org/2002/07/owl#>" + "\n"
                 + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" + "\n"
                 + "PREFIX main: <http://se-on.org/ontologies/general/2012/02/main.owl#>" + "\n"
                 + "PREFIX meas: <http://se-on.org/ontologies/general/2012/02/measurement.owl#>" + "\n"
@@ -19,9 +20,49 @@ public class Queries {
         return base;
     }
 
+    public static String getASMClientsWithFilter(String asmFilter) {
+        String query = getQueryBase() +
+                "select distinct ?client \n" +
+                "from <http://asm-experiments.com> \n"+
+                "where {\n" +
+                "?client build:hasNonOptionalBuildDependencyOn ?asm. \n" +
+                "FILTER(regex(?asm, \""+ asmFilter+"\",\"i\")). \n" +
+                "} ";
+        return query;
+    }
+
+    public static String getClientsASM4AndAbove(String api){
+        String query = getQueryBase() +
+                "select distinct ?client ?clientEntity ?clientMethod \n" +
+                "from <http://asm-experiments.com> \n"+
+                "where {\n" +
+                "?asmEntity1 code:hasCodeIdentifier \""+api+"\".\n" +
+                "?client main:containsFile ?clientFile1.\n" +
+                "?clientFile1 code:containsCodeEntity ?clientEntity.\n" +
+                "?clientEntity code:declaresMethod ?clientMethod.\n" +
+                "?clientEntity code:hasSuperClass+ ?asmEntity1.\n" +
+                "} ";
+        return query;
+    }
+
+    public static String getClientsASM3AndBelow(String api){
+        String query = getQueryBase() +
+                "select distinct ?client ?clientEntity ?clientMethod \n" +
+                "from <http://asm-experiments.com> \n"+
+                "where {\n" +
+                "?asmEntity1 code:hasCodeIdentifier \""+api+"\".\n" +
+                "?client main:containsFile ?clientFile1.\n" +
+                "?clientFile1 code:containsCodeEntity ?clientEntity.\n" +
+                "?clientEntity code:declaresMethod ?clientMethod.\n" +
+                "?clientEntity code:hasSuperClass*/code:implementsInterface+ ?asmEntity1.\n" +
+                "} LIMIT 100";
+        return query;
+    }
+
     public static String getASMClients(String asmLibGAV) {
         String query = getQueryBase() +
                 "select distinct ?client \n" +
+                "from <http://asm-experiments.com> \n"+
                 "where {\n" +
                 "?client build:hasNonOptionalBuildDependencyOn " + asmLibGAV + "." +
                 "} LIMIT 1000";
@@ -31,6 +72,7 @@ public class Queries {
     public static String getASMClientsWithConflicts(String asmLibGAV) {
         String query = getQueryBase() +
                 "select distinct ?client ?dep ?asm2 \n" +
+                "from <http://asm-experiments.com> \n"+
                 "where {\n" +
                 "?client build:hasNonOptionalBuildDependencyOn " + asmLibGAV + "." +
                 "?client build:hasNonOptionalBuildDependencyOn ?dep." +
@@ -46,6 +88,7 @@ public class Queries {
     public static String getASMClientsWithConflicts2(String asmLibGAV) {
         String query = getQueryBase() +
                 "select distinct ?client ?dep1 ?dep2 ?asm2 \n" +
+                "from <http://asm-experiments.com> \n"+
                 "where {\n" +
                 "?client build:hasNonOptionalBuildDependencyOn " + asmLibGAV + "." +
                 "?client build:hasNonOptionalBuildDependencyOn ?dep1." +
@@ -64,6 +107,38 @@ public class Queries {
                 "select distinct ?release \n" +
                 "where {\n" +
                  project + " main:hasRelease ?release.\n" +
+                "}";
+        return query;
+    }
+
+    public static String checkUsage(String client, String clientEntity, String clientMethod, String dependentMethod){
+        String query = getQueryBase() +
+                "SELECT distinct ?someClientEntity ?someMethod " +
+                "from <http://asm-experiments.com> \n"+
+                "WHERE\n" +
+                "{\n" +
+                client+" main:containsFile ?someClientFile.\n" +
+                "?someClientFile code:containsCodeEntity ?someClientEntity.\n" +
+                "?someClientEntity code:declaresMethod ?someMethod.\n" +
+                "?someMethod code:invokesMethod+ "+clientMethod+".\n" +
+                "?someMethod code:invokesMethod+ "+dependentMethod+". \n" +
+                //"FILTER(?someClientEntity != "+clientEntity+")."+
+                "}";
+        return query;
+    }
+
+    public static String checkUsage2(String clientEntity, String dependentEntity){
+        String query = getQueryBase() +
+                "SELECT distinct ?someClientEntity" +
+                "from <http://asm-experiments.com> \n"+
+                "WHERE\n" +
+                "{\n" +
+                "?client main:containsFile "+clientEntity+".\n" +
+                "?client main:containsFile ?someClientFile.\n" +
+                "?someClientFile code:containsCodeEntity ?someClientEntity.\n" +
+                "?someClientEntity main:dependsOn "+clientEntity+".\n" +
+                "?someClientEntity main:dependsOn "+dependentEntity+". \n" +
+                //"FILTER(?someClientEntity != "+clientEntity+")."+
                 "}";
         return query;
     }

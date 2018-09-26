@@ -1,9 +1,9 @@
 package ca.concordia.cs.aseg.sbson.ontologies.publisher.build;
 
 import ca.concordia.cs.aseg.sbson.core.Serializer;
-import ca.concordia.cs.aseg.sbson.core.model.maven.MavenArtifact;
-import ca.concordia.cs.aseg.sbson.core.model.maven.MavenDependency;
-import ca.concordia.cs.aseg.sbson.core.model.maven.MavenLicense;
+import ca.concordia.cs.aseg.sbson.core.model.MavenArtifact;
+import ca.concordia.cs.aseg.sbson.core.model.Dependency;
+import ca.concordia.cs.aseg.sbson.core.model.License;
 import ca.concordia.cs.aseg.sbson.ontologies.publisher.util.NtriplesWriter;
 import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.domain_specific.abox.BuildABox;
 import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.domain_specific.tbox.BuildTBox;
@@ -224,7 +224,7 @@ public class MavenPublisher {
 			triplesWriter.addIndividualTriple(mainArtifact, MainTBox.hasParent(), parent, false);
 		}
 		if (mavenArtifact.getDependencies() != null) {
-			for (MavenDependency dependency : mavenArtifact.getDependencies()) {
+			for (Dependency dependency : mavenArtifact.getDependencies()) {
 				if(dependency.getGroupID().equals("var") ||dependency.getArtifactID().equals("var")||dependency.getVersion().equals("var"))
 					continue;
 				int hasNumberOfExclusions =0;
@@ -265,7 +265,7 @@ public class MavenPublisher {
 			}
 		}
 		if (mavenArtifact.getLicenses() != null) {
-			for (MavenLicense license : mavenArtifact.getLicenses()) {
+			for (License license : mavenArtifact.getLicenses()) {
 				// create data properties
 				triplesWriter.addIndividualTriple(mainArtifact, MavenTBox.hasLicenseName(), license.getName(), true);
 				triplesWriter.addIndividualTriple(mainArtifact, MavenTBox.hasLicenseUrl(), license.getUrl(), true);

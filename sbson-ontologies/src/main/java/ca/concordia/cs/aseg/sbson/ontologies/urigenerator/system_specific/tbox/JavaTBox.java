@@ -18,14 +18,14 @@ public class JavaTBox {
 	 */
 	
 	public static String JavaDoc() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.java)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_java)
 				+ "JavaDoc";
 		
 		return uri;
 	}
 	
 	public static String JavaPackage() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.java)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_java)
 				+ "JavaPackage";
 		
 		return uri;
@@ -39,42 +39,42 @@ public class JavaTBox {
 	 * INDIVIDUALS
 	 */
 	public static String privateVisibility() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.java)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_java)
 				+ "private";
 		
 		return uri;
 	}
 	
 	public static String publicVisibility() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.java)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_java)
 				+ "public";
 		
 		return uri;
 	}
 	
 	public static String protectedVisibility() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.java)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_java)
 				+ "protected";
 		
 		return uri;
 	}
 	
 	public static String overrides() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.java)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_java)
 				+ "overrides";
 		
 		return uri;
 	}
 	
 	public static String suppressWarnings() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.java)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_java)
 				+ "suppressWarnings";
 		
 		return uri;
 	}
 	
 	public static String deprecated() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.java)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_java)
 				+ "deprecated";
 		
 		return uri;

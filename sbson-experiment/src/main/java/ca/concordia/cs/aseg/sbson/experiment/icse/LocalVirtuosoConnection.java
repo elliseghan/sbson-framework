@@ -10,7 +10,7 @@ public class LocalVirtuosoConnection{
 	 * For localhost, provided url should be in format of jdbc:virtuoso://localhost:port
 	 * For host on LAN, the format should be jdbc:virtuoso://hostname:port (e.g. jdbc:virtuoso://slicer:1111)
 	 */
-	private static LocalVirtuosoConnection connection = null;
+	/*private static LocalVirtuosoConnection connection = null;
 	private static Object graph = null;
 
 	private LocalVirtuosoConnection() {
@@ -21,7 +21,7 @@ public class LocalVirtuosoConnection{
 		if (connection == null)
 			connection = new LocalVirtuosoConnection();
 		return connection;
-	}
+	}*/
 
 //	public Object connectToStore(String url, String graphUri, String uname, String pwd) {
 //		if (graph != null && ((VirtGraph) graph).getGraphUrl().equals(url)

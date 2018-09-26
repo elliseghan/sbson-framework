@@ -1,28 +1,8 @@
 package ca.concordia.cs.aseg.sbson.experiment.icse;
 
-import ca.concordia.cs.aseg.sbson.core.Utils;
-import ca.concordia.cs.aseg.sbson.ontologies.publisher.code.JavaByteCodePublisher;
-import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.domain_specific.abox.BuildABox;
-import org.apache.commons.io.FileUtils;
-
-
-import java.io.*;
-import java.util.Collection;
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.openrdf.query.*;
-import org.openrdf.repository.Repository;
-
-import com.fluidops.fedx.Config;
-import com.fluidops.fedx.FedXFactory;
-import com.fluidops.fedx.exception.FedXRuntimeException;
-import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
-
 public class Init {
 
-    public static void getALLASMLibs(String csvFile, String destinationPath) {
+    /*public static void getALLASMLibs(String csvFile, String destinationPath) {
         File file = new File(csvFile);
         String line = "";
         try {
@@ -64,7 +44,7 @@ public class Init {
     public static void createTriplesFromJar(File jarFile, String projectGAV, String outputLocation) {
         System.out.println("Publishing Code triples...");
         String projectURI = BuildABox.BuildRelease(projectGAV);
-        new JavaByteCodePublisher().publish(jarFile, projectURI, null, outputLocation);
+        //new JavaByteCodePublisher().publish(jarFile, projectURI, null, outputLocation);
         System.out.println("Done!\n");
     }
 
@@ -367,7 +347,7 @@ public class Init {
                     boolean result2 = Utils.getFileFromURL(url[0], jarDestination + url[1], false);
 
                     if (result2) {
-                        Experiment.log(outputFile, release + ", " + dep, true);
+                        new Experiment().log(outputFile, release + ", " + dep, true);
                     }
                 }
 
@@ -379,5 +359,5 @@ public class Init {
             System.err.println("Exception: ");
         }
     }
-
+*/
 }

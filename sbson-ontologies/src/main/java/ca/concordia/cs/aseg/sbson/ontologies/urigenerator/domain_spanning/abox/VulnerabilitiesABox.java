@@ -4,7 +4,7 @@
  * http://aseg.cs.concordia.ca/segps
  * Please see the LICENSE file for details.
  */
-package ca.concordia.cs.aseg.segps.ontologies.urigenerator.domain_spanning.abox;
+package ca.concordia.cs.aseg.sbson.ontologies.urigenerator.domain_spanning.abox;
 
 public class VulnerabilitiesABox {
 

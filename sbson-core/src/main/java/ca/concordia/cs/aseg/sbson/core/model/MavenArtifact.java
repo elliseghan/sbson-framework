@@ -1,9 +1,8 @@
-package ca.concordia.cs.aseg.sbson.core.model.maven;
+package ca.concordia.cs.aseg.sbson.core.model;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
-import java.io.Serializable;
 import java.util.List;
 
 import ca.concordia.cs.aseg.sbson.core.Log;
@@ -15,21 +14,15 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 
 
-public class MavenArtifact implements Serializable {
+public class MavenArtifact extends IArtifact {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String name, description, organizationName, organizationURL;
 	private String groupId;
-	private String artifactId;
-	private String version;
-	private List<MavenDependency> dependencies;
 	private MavenArtifact parent;
 	private List<String> modules;
-	private String releasedDate;
-	private List<MavenLicense> licenses;
 
 	public MavenArtifact() {
 	}
@@ -39,102 +32,6 @@ public class MavenArtifact implements Serializable {
 		this.groupId = groupId;
 		this.artifactId = artifactId;
 		this.version = version;
-	}
-
-	public String getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
-	}
-
-	public String getArtifactId() {
-		return artifactId;
-	}
-
-	public void setArtifactId(String artifactId) {
-		this.artifactId = artifactId;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	public MavenArtifact getParent() {
-		return parent;
-	}
-
-	public void setParent(MavenArtifact parent) {
-		this.parent = parent;
-	}
-
-	public List<String> getModules() {
-		return modules;
-	}
-
-	public void setModules(List<String> modules) {
-		this.modules = modules;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<MavenDependency> getDependencies() {
-		return dependencies;
-	}
-
-	public void setDependencies(List<MavenDependency> dependencies) {
-		this.dependencies = dependencies;
-	}
-
-	public String getOrganizationName() {
-		return organizationName;
-	}
-
-	public void setOrganizationName(String organizationName) {
-		this.organizationName = organizationName;
-	}
-
-	public String getOrganizationURL() {
-		return organizationURL;
-	}
-
-	public void setOrganizationURL(String organizationURL) {
-		this.organizationURL = organizationURL;
-	}
-
-	public String getReleasedDate() {
-		return releasedDate;
-	}
-
-	public void setReleasedDate(String releasedDate) {
-		this.releasedDate = releasedDate;
-	}
-
-	public List<MavenLicense> getLicenses() {
-		return licenses;
-	}
-
-	public void setLicenses(List<MavenLicense> licenses) {
-		this.licenses = licenses;
 	}
 
 	@Override
@@ -178,6 +75,21 @@ public class MavenArtifact implements Serializable {
 		} else if (!version.equals(other.version))
 			return false;
 		return true;
+	}
+
+	@Override
+	public File getArtifactFile(ArtifactFileTypes artifactFileType) {
+		return null;
+	}
+
+	@Override
+	public IArtifact getArtifactFromCordinate(ArtifactTypes artifactType, String cordinate) {
+		return null;
+	}
+
+	@Override
+	public IArtifact getArtifactFromFile(File file) {
+		return null;
 	}
 
 	public boolean partialMatch(MavenArtifact artifact) {
@@ -244,4 +156,27 @@ public class MavenArtifact implements Serializable {
 		return mavenArtifact;
 	}
 
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public MavenArtifact getParent() {
+		return parent;
+	}
+
+	public void setParent(MavenArtifact parent) {
+		this.parent = parent;
+	}
+
+	public List<String> getModules() {
+		return modules;
+	}
+
+	public void setModules(List<String> modules) {
+		this.modules = modules;
+	}
 }

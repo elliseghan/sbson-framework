@@ -1,15 +1,15 @@
-package ca.concordia.cs.aseg.sbson.core.model.maven;
+package ca.concordia.cs.aseg.sbson.core.model;
 
-public class MavenLicense {
+public class License {
 
 	private String name, url, comment, distribution;
 
-	public MavenLicense() {
-	
+	public License() {
+
 	}
-	
-	
-	public MavenLicense(String name, String url, String comment, String distribution) {
+
+
+	public License(String name, String url, String comment, String distribution) {
 		super();
 		this.name = name;
 		this.url = url;

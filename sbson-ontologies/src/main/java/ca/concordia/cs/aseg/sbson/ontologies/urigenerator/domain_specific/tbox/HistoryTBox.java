@@ -10,37 +10,37 @@ public class HistoryTBox {
 	 */
 	public static String Branch() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "Branch";
+				OntologyRegistry.seon_history) + "Branch";
 		return uri;
 	}
 
 	public static String ChangeSet() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "ChangeSet";
+				OntologyRegistry.seon_history) + "ChangeSet";
 		return uri;
 	}
 
 	public static String Commit() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "Commit";
+				OntologyRegistry.seon_history) + "Commit";
 		return uri;
 	}
 
 	public static String Committer() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "Committer";
+				OntologyRegistry.seon_history) + "Committer";
 		return uri;
 	}
 
 	public static String Version() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "Version";
+				OntologyRegistry.seon_history) + "Version";
 		return uri;
 	}
 
 	public static String FileUnderVersionControl() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "FileUnderVersionControl";
+				OntologyRegistry.seon_history) + "FileUnderVersionControl";
 		return uri;
 	}
 
@@ -49,79 +49,79 @@ public class HistoryTBox {
 	 */
 	public static String appearsInRelease() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "appearsInRelease";
+				OntologyRegistry.seon_history) + "appearsInRelease";
 		return uri;
 	}
 
 	public static String commitsChangeSet() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "commitsChangeSet";
+				OntologyRegistry.seon_history) + "commitsChangeSet";
 		return uri;
 	}
 
 	public static String commitsVersion() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "commitsVersion";
+				OntologyRegistry.seon_history) + "commitsVersion";
 		return uri;
 	}
 
 	public static String constituesVersion() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "constituesVersion";
+				OntologyRegistry.seon_history) + "constituesVersion";
 		return uri;
 	}
 
 	public static String containsVersion() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "containsVersion";
+				OntologyRegistry.seon_history) + "containsVersion";
 		return uri;
 	}
 
 	public static String followsVersion() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "followsVersion";
+				OntologyRegistry.seon_history) + "followsVersion";
 		return uri;
 	}
 
 	public static String hasVersion() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "hasVersion";
+				OntologyRegistry.seon_history) + "hasVersion";
 		return uri;
 	}
 
 	public static String isCommittedBy() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "isCommittedBy";
+				OntologyRegistry.seon_history) + "isCommittedBy";
 		return uri;
 	}
 
 	public static String isOnBranch() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "isOnBranch";
+				OntologyRegistry.seon_history) + "isOnBranch";
 		return uri;
 	}
 
 	public static String isVersionOf() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "isVersionOf";
+				OntologyRegistry.seon_history) + "isVersionOf";
 		return uri;
 	}
 
 	public static String performsCommit() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "performsCommit";
+				OntologyRegistry.seon_history) + "performsCommit";
 		return uri;
 	}
 
 	public static String precedesVersion() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "precedesVersion";
+				OntologyRegistry.seon_history) + "precedesVersion";
 		return uri;
 	}
 
 	public static String isCommittedIn() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "isCommittedIn";
+				OntologyRegistry.seon_history) + "isCommittedIn";
 		return uri;
 	}
 
@@ -130,37 +130,37 @@ public class HistoryTBox {
 	 */
 	public static String committedOn() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "committedOn";
+				OntologyRegistry.seon_history) + "committedOn";
 		return uri;
 	}
 
 	public static String hasCommitMessage() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "hasCommitMessage";
+				OntologyRegistry.seon_history) + "hasCommitMessage";
 		return uri;
 	}
 
 	public static String hasContentIdentifier() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "hasContentIdentifier";
+				OntologyRegistry.seon_history) + "hasContentIdentifier";
 		return uri;
 	}
 
 	public static String hasTag() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "hasTag";
+				OntologyRegistry.seon_history) + "hasTag";
 		return uri;
 	}
 
 	public static String linesAdded() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "linesAdded";
+				OntologyRegistry.seon_history) + "linesAdded";
 		return uri;
 	}
 
 	public static String linesDeleted() {
 		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace,
-				OntologyRegistry.history) + "linesDeleted";
+				OntologyRegistry.seon_history) + "linesDeleted";
 		return uri;
 	}
 

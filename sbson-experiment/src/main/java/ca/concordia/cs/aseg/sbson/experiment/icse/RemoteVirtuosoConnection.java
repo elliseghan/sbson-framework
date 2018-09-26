@@ -1,17 +1,5 @@
 package ca.concordia.cs.aseg.sbson.experiment.icse;
 
-import java.util.Arrays;
-
-import org.openrdf.query.*;
-import org.openrdf.repository.Repository;
-
-import com.fluidops.fedx.Config;
-import com.fluidops.fedx.FedXFactory;
-import com.fluidops.fedx.exception.FedXRuntimeException;
-import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
-
-
 public class RemoteVirtuosoConnection {
 
     /*
@@ -19,7 +7,7 @@ public class RemoteVirtuosoConnection {
      * The url format should be of the form http://url-to-endpoint (e.g. http://aseg.encs.concordia.ca/virtuoso/sparql)
      */
 
-    private static RemoteVirtuosoConnection connection = null;
+   /* private static RemoteVirtuosoConnection connection = null;
     private static Object graph = null;
 
     private RemoteVirtuosoConnection() {
@@ -52,15 +40,27 @@ public class RemoteVirtuosoConnection {
     }
 
     public TupleQueryResult executeQuery(String query) throws MalformedQueryException, RepositoryException, QueryEvaluationException {
-        String url = "http://aseg.encs.concordia.ca/virtuoso/sparql";
+        *//*String url = "http://aseg.encs.concordia.ca/virtuoso/sparql";
         String uname = "dba";
         String pwd = "dba";
         RemoteVirtuosoConnection connection = RemoteVirtuosoConnection.getInstance();
-        RepositoryConnection graph = (RepositoryConnection) connection.connectToStore(url, uname, pwd);
+        RepositoryConnection graph = (RepositoryConnection) connection.connectToStore(url, uname, pwd);*//*
         TupleQuery q = ((RepositoryConnection) graph).prepareTupleQuery(QueryLanguage.SPARQL, query);
         TupleQueryResult resultSet = q.evaluate();
         return resultSet;
 
     }
+
+    public TupleQueryResult executeQuery(RepositoryConnection repositoryConnection, String query) throws MalformedQueryException, RepositoryException, QueryEvaluationException {
+        *//*String url = "http://aseg.encs.concordia.ca/virtuoso/sparql";
+        String uname = "dba";
+        String pwd = "dba";
+        RemoteVirtuosoConnection connection = RemoteVirtuosoConnection.getInstance();
+        RepositoryConnection graph = (RepositoryConnection) connection.connectToStore(url, uname, pwd);*//*
+        TupleQuery q = ((RepositoryConnection) graph).prepareTupleQuery(QueryLanguage.SPARQL, query);
+        TupleQueryResult resultSet = q.evaluate();
+        return resultSet;
+
+    }*/
 
 }

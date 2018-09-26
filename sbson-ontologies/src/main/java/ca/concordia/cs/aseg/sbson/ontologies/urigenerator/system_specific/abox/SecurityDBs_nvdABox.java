@@ -5,7 +5,7 @@
  * Please see the LICENSE file for details.
  */
 
-package ca.concordia.cs.aseg.segps.ontologies.urigenerator.system_specific.abox;
+package ca.concordia.cs.aseg.sbson.ontologies.urigenerator.system_specific.abox;
 
 public class SecurityDBs_nvdABox {
 

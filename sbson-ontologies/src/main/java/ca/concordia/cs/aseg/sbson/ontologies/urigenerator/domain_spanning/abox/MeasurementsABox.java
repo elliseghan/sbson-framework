@@ -15,7 +15,7 @@ import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.utils.URLCleaner;
 public class MeasurementsABox {
 
 	public static String SimilarityMeasure(String string) {
-		String uri = NamespaceFactory.createAboxNamespace(NamespaceRegistry.theSEONAboxNameSpace, OntologyRegistry.measurement)
+		String uri = NamespaceFactory.createAboxNamespace(NamespaceRegistry.theSEONAboxNameSpace, OntologyRegistry.seon_measurement)
 				+ URLCleaner.clean(string);
 		return uri;
 	}

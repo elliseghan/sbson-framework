@@ -13,18 +13,18 @@ import ca.concordia.cs.aseg.sbson.ontologies.urigenerator.registry.OntologyRegis
 public class MeasurementsTBox {
 
 	public static String SimilarityMeasure() {
-		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.measurement)
+		String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_measurement)
 				+ "SimilarityMeasure";
 		return uri;
 	}
 
 	public static String measuresThing() {
-			String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.main)
+			String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_main)
 					+ "measuresThing";
 			return uri;	}
 
 	public static String hasMeasureValue() {
-			String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.main)
+			String uri = NamespaceFactory.createTboxNamespace(NamespaceRegistry.theSEONTboxNameSpace, OntologyRegistry.seon_main)
 					+ "hasMeasureValue";
 			return uri;
 	}
