@@ -17,7 +17,7 @@ public class EmailDistributor {
     private String login, password, message, subject;
 
     public static void main(String[] args) {
-        EmailDistributor emailDistributor = new EmailDistributor("e_eghan@encs.concordia.ca", "Tr1n!ty");
+        EmailDistributor emailDistributor = new EmailDistributor("emailAddress", "pwd");
         emailDistributor.sendEmail("api-break-survey@encs.concordia.ca");
     }
 
