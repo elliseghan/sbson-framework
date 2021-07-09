@@ -24,10 +24,10 @@ public class EmailDistributor {
     public EmailDistributor() {
     }
 
-    public EmailDistributor(String login, String password) {
+    public EmailDistributor(String login, String password, String host, String port) {
         emailProperties = new Properties();
-        emailProperties.setProperty("mail.host", "smtp.encs.concordia.ca");
-        emailProperties.setProperty("mail.smtp.port", "25");
+        emailProperties.setProperty("mail.host", host);
+        emailProperties.setProperty("mail.smtp.port", port);
         emailProperties.setProperty("mail.smtp.auth", "true");
         emailProperties.setProperty("mail.smtp.starttls.enable", "true");
         this.login = login;
